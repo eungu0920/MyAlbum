@@ -14,6 +14,10 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-
+    @IBAction func touch(_ sender: Any) {
+        print("Hello.")
+//        버튼을 클릭할 때마다 Command Line에 "Hello."가 출력된다.
+    }
+    
 }
 
