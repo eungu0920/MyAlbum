@@ -9,8 +9,16 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    var currentValue = 0
+//    Variable(변수)란 어떤 값을 채워 넣을 수 있는 공간
+    
+    @IBOutlet weak var priceLabel: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        priceLabel.text = "￦ \(currentValue)"
+//        뷰가 로드될 때 priceLabel에 currentValue값을 할당해줌 (0원이 표시됨)
         // Do any additional setup after loading the view.
     }
 
@@ -29,5 +37,31 @@ class ViewController: UIViewController {
 //        present를 통해 alert를 띄운다.
     }
     
+    @IBAction func challenge(_ sender: Any) {
+//        버튼 한 개 더 만들어보기
+        let alert = UIAlertController(title: "It's a challenge", message: "Doing challenge is so happy!", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Yes", style: .default, handler: nil)
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    
+    @IBAction func showAlert(_ sender: Any) {
+//        앨범 앱용 버튼 만들기, 위에 액션들은 사용X
+        let message = "가격은 ￦\(currentValue) 입니다."
+//        string interpoltation : ""안에 \(변수)로 사용한다.
+        
+        let alert = UIAlertController(title: "Hello", message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+        
+        
+        let randomPrice = arc4random_uniform(10000) + 1
+        currentValue = Int(randomPrice)
+//        randomPrice는 UInt32, currentValue는 Int이다. 그래서 randomPrice를 Int로 캐스팅
+        priceLabel.text = "￦ \(currentValue)"
+//        버튼을 누를 때마다 변동되는 가격이 priceLabel의 가격도 함께 업데이트됨
+    }
 }
 
