@@ -11,14 +11,18 @@ class ViewController: UIViewController {
 
     var currentValue = 0
 //    Variable(변수)란 어떤 값을 채워 넣을 수 있는 공간
+//    var currentValue: Int = 0 이라고 적어도 됨, 하지만 스위프트의 타입추론기능으로 안써도되지만 사용하는 것이 좋다.
     
     @IBOutlet weak var priceLabel: UILabel!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        priceLabel.text = "￦ \(currentValue)"
+//        priceLabel.text = "￦ \(currentValue)"
 //        뷰가 로드될 때 priceLabel에 currentValue값을 할당해줌 (0원이 표시됨)
+        refresh()
+//        함수의 사용으로 코드의 중복사용을 막음(기술부채 감소), 코드가 클린해짐
+        
         // Do any additional setup after loading the view.
     }
 
@@ -50,13 +54,19 @@ class ViewController: UIViewController {
 //        앨범 앱용 버튼 만들기, 위에 액션들은 사용X
         let message = "가격은 ￦\(currentValue) 입니다."
 //        string interpoltation : ""안에 \(변수)로 사용한다.
+//        마찬가지로 message의 type은 String이다
+//        let message: String = "가격은 ￦\(currentValue) 입니다."로 사용가능
         
         let alert = UIAlertController(title: "Hello", message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .default, handler: nil)
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
         
-        
+        refresh()
+
+    }
+    
+    func refresh() {
         let randomPrice = arc4random_uniform(10000) + 1
         currentValue = Int(randomPrice)
 //        randomPrice는 UInt32, currentValue는 Int이다. 그래서 randomPrice를 Int로 캐스팅
