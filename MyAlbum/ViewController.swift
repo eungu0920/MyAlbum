@@ -12,6 +12,7 @@ class ViewController: UIViewController {
     var currentValue = 0
 //    Variable(변수)란 어떤 값을 채워 넣을 수 있는 공간
 //    var currentValue: Int = 0 이라고 적어도 됨, 하지만 스위프트의 타입추론기능으로 안써도되지만 사용하는 것이 좋다.
+//    Instance Variable
     
     @IBOutlet weak var priceLabel: UILabel!
     
@@ -56,14 +57,14 @@ class ViewController: UIViewController {
 //        string interpoltation : ""안에 \(변수)로 사용한다.
 //        마찬가지로 message의 type은 String이다
 //        let message: String = "가격은 ￦\(currentValue) 입니다."로 사용가능
+//        
         
         let alert = UIAlertController(title: "Hello", message: message, preferredStyle: .alert)
-        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+        let action = UIAlertAction(title: "OK", style: .default, handler: { action in
+            self.refresh() // closer : handler안에 함수를 넣어서 OK 버튼을 눌렀을 때 가격이 refresh됨.
+        })
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
-        
-        refresh()
-
     }
     
     func refresh() {
